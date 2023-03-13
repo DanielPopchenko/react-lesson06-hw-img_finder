@@ -4,13 +4,18 @@ import Searchbar from "./components/Searchbar";
 import ImageGallery from "./components/ImageGallery";
 
 export default class App extends Component {
-  state = {};
+  state = { imageName: "" };
+
+  handleFormSubmit = (imageName) => {
+    this.setState({ imageName });
+    console.log(imageName);
+  };
 
   render() {
     return (
       <div>
-        <Searchbar />
-        <ImageGallery />
+        <Searchbar onFormSubmit={this.handleFormSubmit} />
+        <ImageGallery imageName={this.props.imageName} />
       </div>
     );
   }

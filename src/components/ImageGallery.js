@@ -1,23 +1,29 @@
 import React, { Component } from "react";
 
 export default class ImageGallery extends Component {
-  state = {};
+  state = {
+    image: null,
+    status: "idle",
+  };
 
-  fetchImages = (e) => {
-    e.preventDefault();
-
+  fetchImages = () => {
+    const apiKey = "34365152-dabc67f475d013033087d2982";
     fetch(
-      "https://pixabay.com/api/?q=cat&page=1&key=34365152-dabc67f475d013033087d2982&image_type=photo&orientation=horizontal&per_page=12"
+      `https://pixabay.com/api/?q=${this.props.imageName}&page=1&key=${apiKey}&image_type=photo&orientation=horizontal&per_page=12`
     )
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res.hits);
+      .then((image) => image.json())
+      .then((image) => this.setState({ image }))
+      .catch((error) => {
+        console.log(error);
       });
   };
+
   render() {
+    const { imageName } = this.props;
+
     return (
       <div>
-        <ul class="gallery"></ul>
+        <ul className="gallery"></ul>
       </div>
     );
   }
