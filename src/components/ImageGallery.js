@@ -1,30 +1,55 @@
 import React, { Component } from "react";
+import "../base.css";
+
+// import ImageGalleryItem from "./ImageGalleryItem";
 
 export default class ImageGallery extends Component {
   state = {
-    image: null,
-    status: "idle",
+    images: [],
+    status: "",
+    error: null,
   };
 
-  fetchImages = () => {
-    const apiKey = "34365152-dabc67f475d013033087d2982";
-    fetch(
-      `https://pixabay.com/api/?q=${this.props.imageName}&page=1&key=${apiKey}&image_type=photo&orientation=horizontal&per_page=12`
-    )
-      .then((image) => image.json())
-      .then((image) => this.setState({ image }))
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  componentDidUpdate(prevProps, prevState) {
+    const prevName = prevProps.imageName;
+    const nextName = this.props.imageName;
+
+    console.log("prevName: ", prevName);
+    console.log("nextName: ", nextName);
+
+    if (prevName !== nextName) {
+      fetch(
+        `https://pixabay.com/api/?q=${nextName}}&page=1&key=34365152-dabc67f475d013033087d2982&image_type=photo&orientation=horizontal&per_page=12`
+      )
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          }
+
+          return Promise.reject(
+            new Error(`Images with ${nextName} tag not found :(`)
+          );
+        })
+        .then((images) => this.setState({ images: images.hits }))
+        .catch((error) => this.setState(error));
+    }
+  }
 
   render() {
-    const { imageName } = this.props;
-    console.log("imageName props name:", imageName);
+    const { images } = this.state;
+
     return (
-      <div>
-        <ul className="gallery"></ul>
-      </div>
+      <ul className="ImageGallery">
+        {images.map((image) => {
+          console.log(image);
+          return (
+            <li key={image.id}>
+              <p>{image.id}</p>
+              <img src={image.largeImageURL} alt="img" />
+            </li>
+          );
+        })}
+      </ul>
     );
   }
 }

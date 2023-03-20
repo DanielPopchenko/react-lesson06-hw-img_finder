@@ -1,14 +1,13 @@
 import React, { Component } from "react";
-import "../components/styles.css";
-import { BsFillPencilFill } from "react-icons/bs";
+import "../base.css";
 
 export default class Searchbar extends Component {
   state = {
     imageName: "",
   };
 
-  handleImageNameChange = (e) => {
-    this.setState({ imageName: e.target.value.toLowerCase() });
+  handleNameChange = (e) => {
+    this.setState({ imageName: e.currentTarget.value });
   };
 
   handleFormSubmit = (e) => {
@@ -20,29 +19,25 @@ export default class Searchbar extends Component {
   };
 
   render() {
-    const { imageName } = this.state;
     return (
       <div>
-        <div>
-          <header className="Searchbar">
-            <form className="SearchForm" onSubmit={this.handleFormSubmit}>
-              <button type="submit" className="SearchForm-button">
-                <BsFillPencilFill />
-                <span className="SearchForm-button-label">Search</span>
-              </button>
+        <header className="Searchbar">
+          <form className="SearchForm" onSubmit={this.handleFormSubmit}>
+            <button type="submit" className="SearchForm-button">
+              <span className="Button-label">Search</span>
+            </button>
 
-              <input
-                onChange={this.handleImageNameChange}
-                value={imageName}
-                className="SearchForm-input"
-                type="text"
-                autoComplete="off"
-                autoFocus
-                placeholder="Search images and photos"
-              />
-            </form>
-          </header>
-        </div>
+            <input
+              className="SearchForm-input"
+              type="text"
+              autoComplete="off"
+              autoFocus
+              placeholder="Search images and photos"
+              onChange={this.handleNameChange}
+              value={this.state.imageName}
+            />
+          </form>
+        </header>
       </div>
     );
   }
