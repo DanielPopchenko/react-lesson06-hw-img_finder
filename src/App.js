@@ -15,7 +15,7 @@ export default class App extends Component {
     return (
       <div>
         <Searchbar onFormSubmit={this.handleFormSubmit} />
-        <ImageGallery imageName={this.props.imageName} />
+        <ImageGallery imageName={this.state.imageName} />
       </div>
     );
   }

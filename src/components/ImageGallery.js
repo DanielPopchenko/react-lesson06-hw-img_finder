@@ -20,7 +20,7 @@ export default class ImageGallery extends Component {
 
   render() {
     const { imageName } = this.props;
-
+    console.log("imageName props name:", imageName);
     return (
       <div>
         <ul className="gallery"></ul>
