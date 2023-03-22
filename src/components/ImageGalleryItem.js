@@ -1,9 +1,13 @@
 import React from "react";
+// import "../base.css";
+import "../base.css";
 
-export default function ImageGalleryItem(id, { ...image }) {
+export default function ImageGalleryItem({ itemKey, imageUrl, alt }) {
+  console.log("imageUrl: ", imageUrl);
+  console.log("alt: ", alt);
   return (
-    <li key={id}>
-      <img src={image.largeImageURL} alt="" />
+    <li>
+      <img className="ImageGalleryItem-image" src={imageUrl} alt={alt} />
     </li>
   );
 }

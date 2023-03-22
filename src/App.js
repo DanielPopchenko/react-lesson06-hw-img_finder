@@ -16,7 +16,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="App">
         <Searchbar onFormSubmit={this.handleSubmit} />
         <ImageGallery imageName={this.state.imageName} />
       </div>
