@@ -1,13 +1,26 @@
 import React from "react";
-// import "../base.css";
 import "../base.css";
 
-export default function ImageGalleryItem({ itemKey, imageUrl, alt }) {
-  console.log("imageUrl: ", imageUrl);
-  console.log("alt: ", alt);
+// import Modal from "./Modal";
+
+export default function ImageGalleryItem({
+  imageUrl,
+  alt,
+  openModal,
+  onClick,
+}) {
   return (
     <li>
-      <img className="ImageGalleryItem-image" src={imageUrl} alt={alt} />
+      <img
+        className="ImageGalleryItem-image"
+        src={imageUrl}
+        alt={alt}
+        onClick={onClick}
+      />
+
+      {/* {openModal === true && <Modal />} */}
     </li>
   );
 }
+
+// ! Модалка ! Не правильное место рендера, исправить
