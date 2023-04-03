@@ -1,14 +1,7 @@
 import React from "react";
 import "../base.css";
 
-// import Modal from "./Modal";
-
-export default function ImageGalleryItem({
-  imageUrl,
-  alt,
-  openModal,
-  onClick,
-}) {
+export default function ImageGalleryItem({ imageUrl, alt, onClick }) {
   return (
     <li>
       <img
@@ -17,8 +10,6 @@ export default function ImageGalleryItem({
         alt={alt}
         onClick={onClick}
       />
-
-      {/* {openModal === true && <Modal />} */}
     </li>
   );
 }

@@ -2,14 +2,9 @@ import React, { Component } from "react";
 import ImageGalleryItem from "./ImageGalleryItem";
 
 export default class ImageGalleryList extends Component {
-  state = { openMadal: false };
-
-  //   handleImageClick = () => {
-  //     // this.setState((state) => ({ openMadal: !state.openMadal }));
-  //   };
+  state = { isOpenModal: true };
 
   render() {
-    // const { openModal } = this.state;
     const { images } = this.props;
     return (
       <div>
@@ -21,8 +16,6 @@ export default class ImageGalleryList extends Component {
                 key={image.id}
                 imageUrl={image.webformatURL}
                 alt={image.tags}
-                // openModal={openModal}
-                // onClick={this.handleImageClick}
               />
             );
           })}
