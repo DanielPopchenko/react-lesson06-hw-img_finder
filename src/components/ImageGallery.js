@@ -16,42 +16,19 @@ export default function ImageGallery({ imageName }) {
   const [images, setImages] = useState([]);
   const [status, setStatus] = useState(Status.IDLE);
   const [error, setError] = useState(null);
-  const [page, setPage] = useState(2);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     setStatus(Status.PENDING);
-
     imageAPI
-      .fetchImages(imageName)
+      .fetchImages(imageName, page)
       .then((images) => {
         // ----
-
-        setImages(images.hits);
+        setImages((state) => [...state, ...images.hits]);
         setStatus(Status.RESOLVED);
-
-        // this.setState({ images: images.hits, status: "resolved" });
       })
       .catch((error) => setError(error));
-  }, [imageName]);
-
-  const handleButtonClick = () => {
-    fetch(
-      `https://pixabay.com/api/?q=${imageName}}&page=${page}&key=34365152-dabc67f475d013033087d2982&image_type=photo&orientation=horizontal&per_page=12`
-    )
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-
-        return Promise.reject(
-          new Error(`Images with ${imageName} tag not found :(`)
-        );
-      })
-      .then((newImages) => {
-        setImages((prev) => [...prev, ...newImages.hits]);
-        setPage((prev) => prev + 1);
-      });
-  };
+  }, [imageName, page]);
 
   // setImages((prevState) => ({
   //   images: [...prevState, ...newImages.hits],
@@ -62,7 +39,9 @@ export default function ImageGallery({ imageName }) {
       {status === "idle" && <h1 className="App-title">Image Gallery</h1>}
       {status === "pending" && <Spinner />}
       {status === "resolved" && <ImageGalleryList images={images} />}
-      {images.length > 1 && <Button onClick={handleButtonClick} />}
+      {images.length > 1 && (
+        <Button onClick={() => setPage((page) => page + 1)} />
+      )}
       {status === "rejected" && <p>{error.message}</p>}
     </div>
   );
