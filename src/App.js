@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Layout from "./components/Layout";
+import { ThemeProvider } from "./providers/ThemeProvider";
 import "./base.css";
 
 import Searchbar from "./components/Searchbar";
@@ -13,8 +15,12 @@ export default function App() {
 
   return (
     <div className="App">
-      <Searchbar onFormSubmit={handleSubmit} />
-      <ImageGallery imageName={imageName} />
+      <ThemeProvider>
+        <Layout>
+          <Searchbar onFormSubmit={handleSubmit} />
+          <ImageGallery imageName={imageName} />
+        </Layout>
+      </ThemeProvider>
     </div>
   );
 }

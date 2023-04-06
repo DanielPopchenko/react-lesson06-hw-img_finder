@@ -1,0 +1,38 @@
+:root {
+    --bg-light: #e9eaee;
+    --accent-dark: #30ba3a;
+    --accent-light: #205ea1;
+}
+
+.layout {
+    background-color: (var(--bg-light));
+    height: 100vh;
+    color: #212121;
+}
+
+h2 {
+    margin: 0;
+    padding: 0;
+}
+
+.layout.dark {
+    background-color: #060606;
+    color: var(--bg-light);
+}
+
+.btn-link {
+    cursor: pointer;
+    display: block;
+    text-decoration: none;
+    color: var(--accent-light);
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+    background-color: transparent;
+    margin-top: 2rem;
+    font-size: 19px;
+}
+
+.layout.dark .btn-link {
+    color: var(--accent-dark);
+}
